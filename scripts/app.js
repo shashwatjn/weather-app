@@ -54,6 +54,7 @@ const updateCity = async (city) => {
 cityForm.addEventListener('submit', e => {
     //prevent default action
     e.preventDefault();
+     
 
     //Getting the city value
     const city = cityForm.city.value.trim();
@@ -65,6 +66,13 @@ cityForm.addEventListener('submit', e => {
     .then(data => updateUI(data))
     .catch(err => console.log(err))
 
+    //set local storage
+    localStorage.setItem('city', city);
 
+});
 
-})
+if(localStorage.getItem('city')){
+    updateCity(localStorage.getItem('city'))
+        .then(data => updateUI(data))
+        .catch(err => console.log(err)); 
+}
